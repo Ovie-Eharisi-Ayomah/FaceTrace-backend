@@ -7,15 +7,21 @@ const signIn = require('./controllers/signIn');
 const profile = require('./controllers/profile');
 const image = require('./controllers/image');
 
-
+DATABASE_URL=postgresql://facetracedb_user:YcRb2xcTYDA15g7dZfsK2zx2HqpxBqDW@dpg-csej8v68ii6s73957q4g-a/facetracedb
+DATABASE_HOST=dpg-csej8v68ii6s73957q4g-a
+DATABASE_USER=facetracedb_user
+DATABASE_PASSWORD=YcRb2xcTYDA15g7dZfsK2zx2HqpxBqDW
+DATABASE_DB=facetracedb
 const db = knex({
     client: 'pg',
     connection: {
-        host: '127.0.0.1',
+        connectionString: process.env.DATABASE_URL,
+        ssl: { rejectUnauthorized: false },
+        host: process.env.DATABASE_HOST,
         port: 5432,
-        user: 'apple',
-        password: '',
-        database: 'face-recognition',
+        user: process.env.DATABASE_USER,
+        password: process.env.DATABASE_PASSWORD,
+        database: process.env.DATABASE_DB,
     },
 });
 
